@@ -23,7 +23,7 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'squeel'    # excellent for db queries
+gem 'squeel', github: 'danielrhodes/squeel'
 gem 'slim'  # add slim support
 gem 'slim-rails'    # replace the .erb with .slim
 gem 'bootstrap-sass'    # add bootstrap to rails
@@ -31,6 +31,8 @@ gem 'autoprefixer-rails'    # adds browsers prefixes to css
 gem 'nprogress-rails'   # customizable progressbar with turbolinks support
 gem 'font-awesome-rails'    # only if you need more icons
 gem 'simple_form'   # always install when working with forms
+
+gem 'devise'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
