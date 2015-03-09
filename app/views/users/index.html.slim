@@ -1,0 +1,11 @@
+.jumbotron.text-center
+  h2 PEOPLE
+  .btn-group role="group" aria-label="Default Button Group"
+    button.btn.btn-default type="button" Everyone
+    button.btn.btn-default type="button" Friends
+    button.btn.btn-default type="button" Requests
+    button.btn.btn-default type="button" Pending
+
+.container
+  .row
+    = render @users

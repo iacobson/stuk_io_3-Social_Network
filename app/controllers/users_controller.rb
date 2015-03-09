@@ -2,6 +2,10 @@ class UsersController < ApplicationController
   #'show' method will have already @user variable defined
   before_action :set_user, only:[:show]
 
+  def index
+    @users = User.all
+  end
+
   def show
   end
 

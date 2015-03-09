@@ -1,0 +1,8 @@
+.col-md-3
+  .thumbnail
+    // will apply link to the elements in the block
+    = link_to user_path(user.username) do
+      = gravatar_tag user.email, size: 200
+    .caption.text-center
+      h3 = user.username
+      p ACTION BUTTON
