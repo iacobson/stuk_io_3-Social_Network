@@ -1,0 +1,17 @@
+.jumbotron
+  .container
+    .row
+      .col-md-4
+        = gravatar_tag @user.email, size: 200
+      .col-md-4
+        h2 = @user.username
+        p
+          strong Age:&nbsp
+          = @user.age
+        p
+          strong Gender:&nbsp
+          = @user.gender
+      .col-md-4
+        p About Me:
+        small
+          = @user.bio
