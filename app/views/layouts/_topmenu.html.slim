@@ -1,37 +1,37 @@
 nav.navbar.navbar-inverse.navbar-fixed-top
   .container-fluid
     .navbar-header
-      button.navbar-toggle.collapsed data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"
+      button.navbar-toggle.collapsed data-target="#dns-top-bar" data-toggle="collapse" type="button"
         span.sr-only Toggle navigation
         span.icon-bar
         span.icon-bar
         span.icon-bar
       = link_to "DSN", root_path, class: "navbar-brand"
-
-    ul.nav.navbar-nav.navbar-right
-      li
-        a href="#"  Timeline
-      li
-        a href="#"  People
-      - if current_user
-        li.dropdown
-          a.dropdown-toggle aria-expanded="false" data-toggle="dropdown" href="#" role="button"
-            = gravatar_tag current_user.email, size: 24
-            | &nbsp
-            = current_user.username
-            span.caret
-          ul.dropdown-menu role="menu"
-            li
-              a href="#"  Profile
-            li
-              a href="#"  Friends
-            li
-              = link_to "Settings", edit_user_registration_path
-            li.divider
-            li
-              = link_to "Logout", destroy_user_session_path, method: :delete
-      - else
+    #dns-top-bar.collapse.navbar-collapse
+      ul.nav.navbar-nav.navbar-right
         li
-          = link_to "Login", new_user_session_path
+          a href="#"  Timeline
+        li
+          a href="#"  People
+        - if current_user
+          li.dropdown
+            a.dropdown-toggle aria-expanded="false" data-toggle="dropdown" href="#" role="button"
+              = gravatar_tag current_user.email, size: 24
+              | &nbsp
+              = current_user.username
+              span.caret
+            ul.dropdown-menu role="menu"
+              li
+                a href="#"  Profile
+              li
+                a href="#"  Friends
+              li
+                = link_to "Settings", edit_user_registration_path
+              li.divider
+              li
+                = link_to "Logout", destroy_user_session_path, method: :delete
+        - else
+          li
+            = link_to "Login", new_user_session_path
     /! /.navbar-collapse
   /! /.container-fluid
