@@ -33,6 +33,7 @@ gem 'font-awesome-rails'    # only if you need more icons
 gem 'simple_form'   # always install when working with forms
 
 gem 'devise'
+gem 'gravatarify'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
