@@ -27,4 +27,23 @@ class User < ActiveRecord::Base
     self.friendships.create(friend: user_2)
   end
 
+  # friend types
+
+  # active friends
+  def active_friends
+	# friends I requested + friends that requested my friendship
+  # map to get the exact list of friends
+	 self.friendship.where(state: "active").map(&:friend) + self.inverse_friendship.where(state: "active").map(&:user)
+  end
+
+  # friend requests I received and not yet approved (or rejected)
+  def pending_friend_requests_from
+    self.inverse_friendships.where(state: "pending")
+  end
+
+  # friend requests I sent but dit not get any response yet
+  def pending_friend_requests_to
+    self.friendships.where(state: "pending")
+  end
+
 end
