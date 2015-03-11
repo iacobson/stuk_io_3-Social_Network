@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   def active_friends
 	# friends I requested + friends that requested my friendship
   # map to get the exact list of friends
-	 self.friendship.where(state: "active").map(&:friend) + self.inverse_friendship.where(state: "active").map(&:user)
+	 self.friendships.where(state: "active").map(&:friend) + self.inverse_friendships.where(state: "active").map(&:user)
   end
 
   # friend requests I received and not yet approved (or rejected)

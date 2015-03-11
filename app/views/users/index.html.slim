@@ -1,10 +1,14 @@
 .jumbotron.text-center
   h2 PEOPLE
   .btn-group role="group" aria-label="Default Button Group"
-    button.btn.btn-default type="button" Everyone
-    button.btn.btn-default type="button" Friends
-    button.btn.btn-default type="button" Requests
-    button.btn.btn-default type="button" Pending
+    // Everyone button will be active unless params[:people] in the link will take a value
+    = link_to "Everyone", users_path, class: "btn btn-default #{'active' unless params[:people]}"
+    // passing "friends" to params[:people], to be used in the users_controller
+    // button will remain active if the params are identifien in the link
+    = link_to "Friends", users_path(people: "friends"), class: "btn btn-default #{'active' if params[:people] == 'friends'}"
+    = link_to "Requests", users_path(people: "requests"), class: "btn btn-default #{'active' if params[:people] == 'requests'}"
+    = link_to "Pending", users_path(people: "pending"), class: "btn btn-default #{'active' if params[:people] == 'pending'}"
+
 
 .container
   .row
