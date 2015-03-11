@@ -19,9 +19,10 @@ class User < ActiveRecord::Base
   # this is why the foreign_key needs to be specified
 
 
-  # requesting friendship
+  # requesting friendship ==> will be used in friendships_controller method Create
   # consider user_1 as the user that request the friendship
   # and user 2 as the one that must accept
+  # usage: current_user.request_friendship(user_2)
   def request_friendship (user_2)
     #self will be current user (user_1)
     self.friendships.create(friend: user_2)
@@ -68,5 +69,12 @@ class User < ActiveRecord::Base
       end
     end
   end
+
+  #find the friendship between 2 users, needed for destroy method in friendship.controller
+  #will be passed on by the link in users_helper
+  def friendship_finder(user_2)
+    Friendship.where(user_id: [self.id, user_2.id], friend_id: [self.id, user_2.id]).first
+  end
+
 
 end

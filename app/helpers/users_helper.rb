@@ -5,14 +5,18 @@ module UsersHelper
     # checking friendship status between current_user and each user passed in the views/users/_user.html.slim partial
     case current_user.friendship_status(user)
     when "friends"
-      "Remove Friendhip"
+      # find the friendship of current_user with the user, using friendship_finder Method defined in user.rb Model
+      link_to "Cancel Friendship", friendship_path(current_user.friendship_finder(user)), method: :delete
     when "pending"
-      "Cancel Request"
+      link_to "Cancel Request", friendship_path(current_user.friendship_finder(user)), method: :delete
     when "requested"
-      "Accept or Deny"
+      # this is an update, will have the method :put
+      link_to "Accept", accept_friendship_path(current_user.friendship_finder(user)), method: :put
     when "not_friends"
-      "Add friend"
+      # pass the user.id, needed for the create Method in friendship_controller
+      # the create action is coming from a link_to, not from a form, so we need to specify method: :post
+      link_to "Add Friend", friendships_path(user_id: user.id), method: :post
     end
   end
-  
+
 end

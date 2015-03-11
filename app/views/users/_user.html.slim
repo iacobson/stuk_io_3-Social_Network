@@ -5,4 +5,7 @@
       = gravatar_tag user.email, size: 200
     .caption.text-center
       h3 = user.username
-      p ACTION BUTTON
+      //show actions only if the user is logged in
+      - if current_user
+        // action_button(user) method is defined in the helpers/friendship_helper.rb
+        p = action_button(user)
