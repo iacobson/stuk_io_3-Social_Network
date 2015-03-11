@@ -8,8 +8,8 @@ class Friendship < ActiveRecord::Base
 
   #handling friendship requests
   def accept_friendship
-	# "self" is used for the current friendship
-	self.update_attributes(state: "active", friended_at: Time.now)
+  	# "self" is used for the current friendship
+  	self.update_attributes(state: "active", friended_at: Time.now)
   end
 
   def deny_friendship
@@ -20,5 +20,5 @@ class Friendship < ActiveRecord::Base
   	self.destroy
   end
 
-  
+
 end

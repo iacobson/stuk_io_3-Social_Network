@@ -46,4 +46,27 @@ class User < ActiveRecord::Base
     self.friendships.where(state: "pending")
   end
 
+  # checking friendship status between current user and other user
+  def friendship_status (user_2)
+    # friendship is selecting records where the user_id AND friend_id is the current user OR the user we want to check friendship against
+    # friendship is checking relation between 2 persons, so will always have only ONE record
+    friendship = Friendship.where(user_id: [self.id, user_2.id], friend_id: [self.id, user_2.id])
+    # if no record in friendship users are not friends
+    unless friendship.any?
+      return "not_friends"
+    else
+      if friendship.first.state == "active"
+        return "friends"
+      else
+        # if current user is the friendship user, he requested friendship but not received yet the response
+        if friendship.first.user == self
+          return "pending"
+        # if current user is the friendship friend, he received a friend request but did not responded
+        elsif friendship.first.friend == self
+          return "requested"
+        end
+      end
+    end
+  end
+
 end
