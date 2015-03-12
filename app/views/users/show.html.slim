@@ -15,3 +15,32 @@
         p About Me:
         small
           = @user.bio
+
+.container
+  .row
+    .col-md-3
+      .panel.panel-default
+        // display how many friends user have
+        // active_friends method is defined in user.rb Model
+        .panel-heading
+          | FRIENDS (#{@user.active_friends.size})
+        .panel-body
+          // limit the active friends pictures show to 16
+          - @user.active_friends.last(16).each do |user|
+            // users are tracked by username - see users_controller "def set_user"
+            = link_to user_path(user.username) do
+              = gravatar_tag user.email, size:40
+
+
+
+    .col-md-6
+
+    .col-md-3
+      .panel.panel-default
+        // display public_activity defined in friendship_controller
+        // @activities was defined in users_controller
+        .panel-heading
+          | RECENT ACTIVITY
+        .panel-body
+          // this method is specific to public_acitivity gem
+          = render_activities(@activities)

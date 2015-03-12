@@ -1,4 +1,7 @@
 class Friendship < ActiveRecord::Base
+#will be tracked by public_activity gem
+include PublicActivity::Model
+
   belongs_to :user    #the user is the one requesting the friendship
 
   belongs_to :friend, class_name: "User"  #the friend is the one that receives the request for friendship.

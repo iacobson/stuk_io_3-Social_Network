@@ -20,6 +20,8 @@ class FriendshipsController < ApplicationController
   def accept
     # accept_friendship Method is defined in the friendship.rb Model
     @friendship.accept_friendship
+    # accept friend activity will be tracked by public_activity gem
+    @friendship.create_activity key:'friendship.accepted', owner: @friendship.user, recipient: @friendship.friend
     redirect_to users_path, notice: "Friendship Accepted"
   end
 

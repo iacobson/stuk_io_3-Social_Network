@@ -34,6 +34,7 @@ gem 'simple_form'   # always install when working with forms
 
 gem 'devise'
 gem 'gravatarify'
+gem 'public_activity'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
