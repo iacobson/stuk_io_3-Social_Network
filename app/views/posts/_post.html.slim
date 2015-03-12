@@ -1,0 +1,18 @@
+//form will be embeded in views/users/show.html.slim
+
+
+.panel.panel-default
+  .panel-heading
+    = gravatar_tag post.user.email, size: 20
+    | &nbsp
+    = post.user.username
+    | &nbsp posted this about &nbsp
+    = time_ago_in_words([post.created_at, post.updated_at].max)
+    | &nbsp ago &nbsp &nbsp &nbsp
+    - if current_user == post.user
+      .pull-right
+        = link_to "edit", edit_post_path(post)
+        | &nbsp | &nbsp
+        = link_to "x", post_path(post), method: :delete
+  .panel-body
+    = raw(post.content_html)

@@ -8,11 +8,14 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   resources :users, only: [:show, :index]
+
   resources :friendships, only: [:create, :destroy, :accept] do
     member do
       #custom action (outside CRUD) for accepting friendship
       put :accept
     end
   end
+
+  resources :posts, only: [:create, :edit, :update, :destroy]
 
 end

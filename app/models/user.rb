@@ -14,9 +14,12 @@ class User < ActiveRecord::Base
   # linking with friendship model
   has_many :friendships, dependent: :destroy # if you delete a user, the corresponding friendships will be deleted
 
-  has_many :inverse_friendships, class_name: "Friendship", foreign_key: "friend_id", dependent: :destroy
   # this user will be the friend_id in the Friendships model, so we can find users that are his friends.
   # this is why the foreign_key needs to be specified
+  has_many :inverse_friendships, class_name: "Friendship", foreign_key: "friend_id", dependent: :destroy
+
+  has_many :posts, dependent: :destroy
+
 
 
   # requesting friendship ==> will be used in friendships_controller method Create

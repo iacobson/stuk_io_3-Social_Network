@@ -27,8 +27,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    #owner_id and recipient_id are created by public_activity gem based on info given in friendship_controller (accept Method)
+    # owner_id and recipient_id are created by public_activity gem based on info given in friendship_controller (accept Method)
     @activities = PublicActivity::Activity.where(owner_id: @user.id) + PublicActivity::Activity.where(recipient_id: @user.id)
+    # creating new posts in views/users/show
+    @post = Post.new
+    # display user posts in views/users/show
+    @posts = @user.posts
   end
 
   private
