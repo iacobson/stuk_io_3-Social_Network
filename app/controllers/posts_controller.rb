@@ -6,6 +6,8 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
+      # create public_activity when a new post is created
+      @post.create_activity key: "post.created", owner: @post.user
       redirect_to user_path(@post.user.username), notice: "Post created"
     else
       redirect_to user_path(@post.user.username), notice: "Post NOT created, please retry!"

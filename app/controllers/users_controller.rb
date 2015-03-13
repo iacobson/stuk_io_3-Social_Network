@@ -28,11 +28,13 @@ class UsersController < ApplicationController
 
   def show
     # owner_id and recipient_id are created by public_activity gem based on info given in friendship_controller (accept Method)
-    @activities = PublicActivity::Activity.where(owner_id: @user.id) + PublicActivity::Activity.where(recipient_id: @user.id)
+    #sort public_acitivity by created_at with sql
+    @activities = PublicActivity::Activity.where(owner_id: @user.id).order('created_at DESC')
     # creating new posts in views/users/show
     @post = Post.new
     # display user posts in views/users/show
-    @posts = @user.posts
+    # sort posting by the newest created or updated dates
+    @posts = @user.posts.order('max(created_at,updated_at) DESC')
   end
 
   private

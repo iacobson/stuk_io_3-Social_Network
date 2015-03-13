@@ -1,0 +1,5 @@
+//this is rendered by views/users/show.html.slim
+// if activity being tracked still exists
+- if activity.trackable
+  = fa_icon "pencil 2x", class: "text-muted pull-left fa-fw"
+  p  #{link_to activity.owner.username, user_path(activity.owner.username)} created a new post about #{time_ago_in_words(activity.created_at)} ago
