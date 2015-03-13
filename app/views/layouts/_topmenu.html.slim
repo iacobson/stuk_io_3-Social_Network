@@ -10,7 +10,7 @@ nav.navbar.navbar-inverse.navbar-fixed-top
     #dns-top-bar.collapse.navbar-collapse
       ul.nav.navbar-nav.navbar-right
         li
-          a href="#"  Timeline
+          = link_to "Timeline", activities_path
         li
           = link_to "People", users_path
         - if current_user

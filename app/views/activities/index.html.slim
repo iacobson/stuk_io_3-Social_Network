@@ -1,0 +1,35 @@
+.jumbotron.text-center
+  h1 TIMELINE
+  .btn-group role="group" aria-label="Default"
+    // button will remain active as long as there is no "content=posts" in the passed link
+    = link_to "All", activities_path, class: "btn btn-default #{'active' unless params[:content]}"
+    // button will pass params[:content] = 'posts' to the link, to be used in the case analysis in activities_controller
+    = link_to "Posts", activities_path(content: "posts"), class: "btn btn-default #{'active' if params[:content] == 'posts'}"
+
+// Timeline styling credits: http://bootsnipp.com/snippets/featured/timeline-responsive
+.container
+  ul.timeline
+    - @activities.each_with_index do |activity|
+      //if the activity exists
+      - if activity.trackable
+
+        // to distribute activities on left/right of timeline , posts must be assigned with an index (see link above)
+        // every cycle of each_with_index will be considered odd or even and assign or not the "timeline-inverted" class to the li
+        // does not work with something like |activity, index|  if index.odd? , if you delete posts, the index will remain the same so the posts will not be rearranged
+
+
+        li class= " #{'timeline-inverted' if cycle('odd', 'even') == "odd"} "
+          .timeline-badge = gravatar_tag activity.owner.email, size: 55
+          .timeline-panel
+            .timeline-heading
+
+              h4.timeline-title = link_to activity.owner.username, user_path(activity.owner.username)
+              p
+                small = time_ago_in_words(activity.created_at)
+                | ago
+            .timeline-body
+              - case activity.trackable_type
+                - when "Post"
+                  = raw(activity.trackable.content_html)
+                - when "Friendship"
+                  p #{link_to activity.owner.username, user_path(activity.owner.username)} is now friend with #{link_to activity.recipient.username, user_path(activity.recipient.username)}
