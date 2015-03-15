@@ -36,8 +36,9 @@ class UsersController < ApplicationController
     # using squeeel gem for querry {}. Should cover both possibilities that user is owner and recipient
     user_id = @user.id
 
-    #@activities = PublicActivity::Activity.where{(owner_id == user_id) | (recipient_id == user_id) }.order('created_at DESC')
-    @activities = PublicActivity::Activity.where(owner_id: @user)
+
+    @activities = PublicActivity::Activity.where{(owner_id == user_id) | (recipient_id == user_id) }.order('created_at DESC')
+
 
     # creating new posts in views/users/show
     @post = Post.new
