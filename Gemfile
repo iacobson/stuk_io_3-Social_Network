@@ -60,8 +60,8 @@ group :development, :test do
   gem 'sqlite3'
 end
 
-group :prodction do
+group :production do
   gem 'pg'
   gem 'rails_12factor'
-  #gem 'unicorn'
+  gem 'unicorn'
 end
