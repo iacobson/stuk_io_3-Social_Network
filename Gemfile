@@ -23,7 +23,7 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-#gem 'squeel', github: 'danielrhodes/squeel'
+gem 'squeel', github: 'danielrhodes/squeel'
 gem 'slim'  # add slim support
 gem 'slim-rails'    # replace the .erb with .slim
 gem 'bootstrap-sass'    # add bootstrap to rails
