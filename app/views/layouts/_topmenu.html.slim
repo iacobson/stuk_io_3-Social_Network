@@ -9,11 +9,15 @@ nav.navbar.navbar-inverse.navbar-fixed-top
       = link_to "DSN", root_path, class: "navbar-brand"
     #dns-top-bar.collapse.navbar-collapse
       ul.nav.navbar-nav.navbar-right
-        li
-          = link_to "Timeline", activities_path
-        li
-          = link_to "People", users_path
         - if current_user
+          li
+            = link_to "Timeline", activities_path
+          li
+            = link_to  users_path
+              | People &nbsp
+              - if request_count > 0
+                span.badge
+                  small = request_count
           li.dropdown
             a.dropdown-toggle aria-expanded="false" data-toggle="dropdown" href="#" role="button"
               = gravatar_tag current_user.email, size: 24
@@ -24,7 +28,7 @@ nav.navbar.navbar-inverse.navbar-fixed-top
               li
                 = link_to "Profile", user_path(current_user.username)
               li
-                a href="#"  Friends
+                = link_to "Friends", users_path(people: "friends")
               li
                 = link_to "Settings", edit_user_registration_path
               li.divider

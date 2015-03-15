@@ -51,6 +51,7 @@ class User < ActiveRecord::Base
   end
 
   # checking friendship status between current user and other user
+  # friendship status will be used to determine the buttons for users in the views/users/index.html.slim
   def friendship_status (user_2)
     # friendship is selecting records where the user_id AND friend_id is the current user OR the user we want to check friendship against
     # friendship is checking relation between 2 persons, so will always have only ONE record
@@ -78,6 +79,5 @@ class User < ActiveRecord::Base
   def friendship_finder(user_2)
     Friendship.where(user_id: [self.id, user_2.id], friend_id: [self.id, user_2.id]).first
   end
-
 
 end

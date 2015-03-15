@@ -24,12 +24,19 @@ class UsersController < ApplicationController
       @users = User.where.not(id: current_user.id)
     end
 
+    # methods to display number of friends, pending requests, etc
+    @friend_count = current_user.active_friends.size
+    @pending_count = current_user.pending_friend_requests_to.map(&:friend).size
+
   end
 
   def show
     # owner_id and recipient_id are created by public_activity gem based on info given in friendship_controller (accept Method)
-    #sort public_acitivity by created_at with sql
-    @activities = PublicActivity::Activity.where(owner_id: @user.id).order('created_at DESC')
+    # sort public_acitivity by created_at with sql
+    # using squeeel gem for querry {}. Should cover both possibilities that user is owner and recipient
+    user_id = @user.id
+    @activities = PublicActivity::Activity.where{(owner_id == user_id) | (recipient_id == user_id) }.order('created_at DESC')
+
     # creating new posts in views/users/show
     @post = Post.new
     # display user posts in views/users/show
@@ -43,4 +50,5 @@ class UsersController < ApplicationController
     # find the user by username (not by ID)
     @user = User.find_by(username: params[:id])
   end
+
 end

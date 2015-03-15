@@ -8,6 +8,7 @@ class FriendshipsController < ApplicationController
     # request_friendship Method is defined in the users.rb Model
     @friendship = current_user.request_friendship(@user)
     redirect_to users_path, notice: "Friendship Requested to #{@user.username}"
+
   end
 
   def destroy
@@ -20,10 +21,10 @@ class FriendshipsController < ApplicationController
   def accept
     # accept_friendship Method is defined in the friendship.rb Model
     @friendship.accept_friendship
+
     # accept friend activity will be tracked by public_activity gem
-    # will cover both cases when you requsted friendship and when you received request for friendship
     @friendship.create_activity key:'friendship.accepted', owner: @friendship.user, recipient: @friendship.friend
-    @friendship.create_activity key:'friendship.accepted', owner: @friendship.friend, recipient: @friendship.user
+
     redirect_to users_path, notice: "Friendship Accepted"
   end
 

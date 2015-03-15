@@ -5,9 +5,16 @@
     = link_to "Everyone", users_path, class: "btn btn-default #{'active' unless params[:people]}"
     // passing "friends" to params[:people], to be used in the users_controller
     // button will remain active if the params are identifien in the link
-    = link_to "Friends", users_path(people: "friends"), class: "btn btn-default #{'active' if params[:people] == 'friends'}"
-    = link_to "Requests", users_path(people: "requests"), class: "btn btn-default #{'active' if params[:people] == 'requests'}"
-    = link_to "Pending", users_path(people: "pending"), class: "btn btn-default #{'active' if params[:people] == 'pending'}"
+    = link_to "Friends  (#{@friend_count})", users_path(people: "friends"), class: "btn btn-default #{'active' if params[:people] == 'friends'}"
+    // reuquest_count Method is defined in the application_controller, in order to be available in ALL VIEWS
+    // using block instead of standard link_to, in order to inser the span.badge. The same functions for ICONS also !
+    = link_to users_path(people: "requests"), class: "btn btn-default #{'active' if params[:people] == 'requests'}" do
+      | Requests &nbsp
+      - if request_count > 0
+        span.badge
+          small = request_count
+
+    = link_to "Pending #{ '(' + @pending_count.to_s + ')' if @pending_count > 0}", users_path(people: "pending"), class: "btn btn-default #{'active' if params[:people] == 'pending'}"
 
 
 .container
