@@ -36,15 +36,14 @@ class UsersController < ApplicationController
     # using squeeel gem for querry {}. Should cover both possibilities that user is owner and recipient
     user_id = @user.id
 
-
-    @activities = PublicActivity::Activity.where{(owner_id == user_id) | (recipient_id == user_id) }#.order('created_at DESC') #TODO fix it for Postgres
+    @activities = PublicActivity::Activity.where{(owner_id == user_id) | (recipient_id == user_id) }.order{created_at.desc} #TODO fix it for Postgres
 
 
     # creating new posts in views/users/show
     @post = Post.new
     # display user posts in views/users/show
-    # sort posting by the newest created or updated dates
-    @posts = @user.posts#.order('max(created_at,updated_at) DESC') #TODO fix it for Postgres
+    # sort posting by the newest updated date. The update_at is always equal or newer than created_at
+    @posts = @user.posts.order{updated_at.desc}
   end
 
   private

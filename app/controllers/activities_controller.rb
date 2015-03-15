@@ -13,9 +13,9 @@ class ActivitiesController < ApplicationController
     case params[:content]
     when 'posts'
       # when the link contains params "post", display only the posts, by specifying the trackable_type
-      @activities = PublicActivity::Activity.where(owner_id: @users, trackable_type: "Post")#.order('max(created_at,updated_at) DESC') #TODO fix it for Postgres
+      @activities = PublicActivity::Activity.where(owner_id: @users, trackable_type: "Post").order{updated_at.desc}
     else
-      @activities = PublicActivity::Activity.where(owner_id: @users)#.order('max(created_at,updated_at) DESC') #TODO fix it for Postgres
+      @activities = PublicActivity::Activity.where(owner_id: @users).order{updated_at.desc} 
     end
 
   end
