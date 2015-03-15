@@ -37,14 +37,14 @@ class UsersController < ApplicationController
     user_id = @user.id
 
 
-    @activities = PublicActivity::Activity.where{(owner_id == user_id) | (recipient_id == user_id) }.order('created_at DESC')
+    @activities = PublicActivity::Activity.where{(owner_id == user_id) | (recipient_id == user_id) }#.order('created_at DESC') #TODO fix it for Postgres
 
 
     # creating new posts in views/users/show
     @post = Post.new
     # display user posts in views/users/show
     # sort posting by the newest created or updated dates
-    @posts = @user.posts.order('max(created_at,updated_at) DESC')
+    @posts = @user.posts#.order('max(created_at,updated_at) DESC') #TODO fix it for Postgres
   end
 
   private
