@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, class_name: "Friendship", foreign_key: "friend_id", dependent: :destroy
 
   has_many :posts, dependent: :destroy
+  # nested association user > post > comment
+  has_many :comments, through: :posts
 
 
 

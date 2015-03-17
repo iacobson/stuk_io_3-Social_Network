@@ -1,0 +1,5 @@
+//this is rendered by views/users/show.html.slim
+// if activity being tracked still exists
+- if activity.trackable
+  = fa_icon "comments 2x", class: "text-muted pull-left fa-fw"
+  p  #{link_to activity.owner.username, user_path(activity.owner.username)} commented on #{link_to activity.recipient.username, user_path(activity.recipient.username)} 's #{link_to "post", post_path(activity.trackable.id)}

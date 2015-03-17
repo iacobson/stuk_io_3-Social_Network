@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:edit, :update, :destroy]
+  before_action :set_post, only: [:edit, :update, :destroy, :show]
 
   # the view for create will be in the views/users/show.html.slim
   # the @post = Post.new will be created in users_controller (show method)
@@ -12,6 +12,15 @@ class PostsController < ApplicationController
     else
       redirect_to user_path(@post.user.username), notice: "Post NOT created, please retry!"
     end
+  end
+
+  def show
+    # create a new comment
+    @comment = Comment.new
+
+    # needed to display comments for this post
+    @comments = @post.comments.order{updated_at.desc}
+
   end
 
   def edit
@@ -32,12 +41,14 @@ class PostsController < ApplicationController
     redirect_to user_path(@post.user.username), notice: "Post deleted"
   end
 
-
-
   private
 
   def post_params
     params.require(:post).permit(:content)
+  end
+
+  def comment_params
+    params.require(:comment).permit(:comment_content)
   end
 
   def set_post

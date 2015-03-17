@@ -36,7 +36,7 @@
     .col-md-6
       - if current_user == @user
         = render "posts/form"
-      // _posts partial is in views/posts
+      // _post partial is in views/posts
       = render @posts
 
     .col-md-3
@@ -48,3 +48,4 @@
         .panel-body
           // this method is specific to public_acitivity gem
           = render_activities(@activities)
+        
