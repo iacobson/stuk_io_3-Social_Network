@@ -14,3 +14,4 @@ based on https://stuk.io/en/courses/social-network course
 ### Improvements
 - custom font-awesome icons for each action: friends, posts
 - automatic resize of pictures added with auto_html through jQuery
+- new post from Timeline

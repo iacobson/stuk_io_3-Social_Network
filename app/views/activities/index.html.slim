@@ -9,6 +9,14 @@
 // Timeline styling credits: http://bootsnipp.com/snippets/featured/timeline-responsive
 .container
   ul.timeline
+    // add new post
+    li
+      .timeline-badge = gravatar_tag current_user.email, size: 55
+      .timeline-panel
+        .timeline-body
+          = render "posts/form"
+
+    // timeline activities
     - @activities.each_with_index do |activity|
       //if the activity exists
       - if activity.trackable
@@ -18,7 +26,7 @@
         // does not work with something like |activity, index|  if index.odd? , if you delete posts, the index will remain the same so the posts will not be rearranged
 
 
-        li class= " #{'timeline-inverted' if cycle('odd', 'even') == "even"} "
+        li class= " #{'timeline-inverted' if cycle('odd', 'even') == "odd"} "
           .timeline-badge = gravatar_tag activity.owner.email, size: 55
           .timeline-panel
             .timeline-heading
@@ -44,7 +52,7 @@
                       br
                       small
                         // count_comments is defined in the post Model
-                        strong = activity.trackable.count_comments
+                        strong#counter_number = activity.trackable.count_comments
 
 
                 - when "Friendship"
@@ -52,7 +60,7 @@
 
                 - when "Comment"
                   // find the post by comment.post_id
-                  p #{link_to activity.owner.username, user_path(activity.owner.username)} commented on #{link_to activity.recipient.username, user_path(activity.recipient.username)} 's #{link_to "post", post_path(activity.trackable.post_id)} :
+                  p commented on #{link_to activity.recipient.username, user_path(activity.recipient.username)} 's #{link_to "post", post_path(activity.trackable.post_id)} :
                   br
                   = raw(activity.trackable.comment_content_html)
                   .timeline-footer
@@ -62,4 +70,4 @@
                       br
                       small
                         // count_comments is defined in the post Model
-                        stron#counter_number = Post.where(id: activity.trackable.post_id).first.count_comments
+                        strong#counter_number = Post.where(id: activity.trackable.post_id).first.count_comments
