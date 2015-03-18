@@ -11,7 +11,7 @@
   ul.timeline
     // add new post
     li
-      .timeline-badge = gravatar_tag current_user.email, size: 55
+      .timeline-badge = gravatar_tag current_user.email, size: 55, html: {class: "img-circle"}
       .timeline-panel
         .timeline-body
           = render "posts/form"
@@ -27,7 +27,7 @@
 
 
         li class= " #{'timeline-inverted' if cycle('odd', 'even') == "odd"} "
-          .timeline-badge = gravatar_tag activity.owner.email, size: 55
+          .timeline-badge = gravatar_tag activity.owner.email, size: 55, html: {class: "img-circle"}
           .timeline-panel
             .timeline-heading
               // adding icons to activities

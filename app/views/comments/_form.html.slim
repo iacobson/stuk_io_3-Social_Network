@@ -1,7 +1,8 @@
 //form will be embeded in views/posts/show.html.slim
 // @comment is defined in the posts_controller - show Method
 
-= simple_form_for(@comment, url: comments_path(@comment, post_id: @post.id)) do |f|
+//pass the
+= simple_form_for [@post, @comment] do |f|
   .panel.panel-info
     .panel-heading COMMENT
     .panel-body
