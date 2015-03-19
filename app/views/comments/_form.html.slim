@@ -1,7 +1,7 @@
 //form will be embeded in views/posts/show.html.slim
 // @comment is defined in the posts_controller - show Method
 
-//pass the
+// this is possible because of nested routes (check routes.rb)
 = simple_form_for [@post, @comment] do |f|
   .panel.panel-info
     .panel-heading COMMENT

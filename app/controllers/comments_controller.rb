@@ -6,9 +6,7 @@ class CommentsController < ApplicationController
 
   # the view for create will be in the views/comments/show.html.slim
   def create
-
-
-    # use build instead of new
+    # use BUILD instead of NEW
     @comment = @post.comments.build(comment_params)
     @comment.user = current_user
     if @comment.save
