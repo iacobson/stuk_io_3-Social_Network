@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
     # use BUILD instead of NEW
     # comment_params already includes post_id through the hidden field
 
-    @comment = current_user.posts.comments.build(comment_params)
+    @comment = current_user.comments.build(comment_params)
     byebug
     if @comment.save
       # create public_activity when a new comment is created
