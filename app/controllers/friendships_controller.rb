@@ -29,17 +29,19 @@ class FriendshipsController < ApplicationController
   end
 
 
+
+
   private
 
-  def set_user
-    # :user_id is passed in from users_helper.rb
-    @user = User.find(params[:user_id])
-  end
+    def set_user
+      # :user_id is passed in from users_helper.rb
+      @user = User.find(params[:user_id])
+    end
 
-  def set_friendship
+    def set_friendship
 
-    @friendship = Friendship.find(params[:id])
-  end
+      @friendship = Friendship.find(params[:id])
+    end
 
 
 end

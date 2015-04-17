@@ -46,11 +46,14 @@ class UsersController < ApplicationController
     @posts = @user.posts.order{updated_at.desc}
   end
 
+
+
+
   private
 
-  def set_user
-    # find the user by username (not by ID)
-    @user = User.find_by(username: params[:id])
-  end
+    def set_user
+      # find the user by username (not by ID)
+      @user = User.find_by(username: params[:id])
+    end
 
 end

@@ -3,10 +3,11 @@ class Comment < ActiveRecord::Base
 include PublicActivity::Model
 
   belongs_to :user
-  belongs_to :posts
+  belongs_to :post
 
   #user must be logged to post
   validates_presence_of :user_id
+  validates_presence_of :post_id
   validates_presence_of :comment_content
 
   #auto_html gem configuration

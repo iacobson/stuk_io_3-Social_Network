@@ -20,7 +20,7 @@ class PostsController < ApplicationController
 
     # needed to display comments for this post
     @comments = @post.comments.order{updated_at.desc}
-
+    
   end
 
   def edit
@@ -41,18 +41,17 @@ class PostsController < ApplicationController
     redirect_to user_path(@post.user.username), notice: "Post deleted"
   end
 
+
+
+
   private
 
-  def post_params
-    params.require(:post).permit(:content)
-  end
+    def post_params
+      params.require(:post).permit(:content)
+    end
 
-  def comment_params
-    params.require(:comment).permit(:comment_content)
-  end
-
-  def set_post
-    @post = Post.find(params[:id])
-  end
+    def set_post
+      @post = Post.find(params[:id])
+    end
 
 end

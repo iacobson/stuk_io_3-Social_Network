@@ -16,11 +16,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :posts, only: [:create, :show, :edit, :update, :destroy] do
+  resources :posts, only: [:create, :show, :edit, :update, :destroy]
 
-    resources :comments, only: [:create, :edit, :update, :destroy]
-    
-  end
+  resources :comments, only: [:create, :edit, :update, :destroy]
+
 
   resources :activities, only: [:index]
 
