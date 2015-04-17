@@ -11,7 +11,6 @@ class CommentsController < ApplicationController
     # comment_params already includes post_id through the hidden field
 
     @comment = current_user.comments.build(comment_params)
-    byebug
     if @comment.save
       # create public_activity when a new comment is created
       @comment.create_activity key: "comment.posted", owner: @comment.user, recipient: @comment.post.user
