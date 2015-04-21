@@ -1,5 +1,7 @@
 //form will be embeded in views/posts/show.html.slim
 // @comment is defined in the posts_controller - show Method
+- if @post.id == nil
+  - @post = post
 
 = simple_form_for @comment do |f|
   .panel.panel-info
@@ -8,5 +10,6 @@
       = f.error_notification
       = f.input :comment_content, required: true, label: false, placeholder: "comment here", input_html: {class: "form-control"}
       = f.hidden_field :post_id, value: @post.id
+
     .panel-footer
       = f.button :submit, class: "btn btn-primary btn-block"
