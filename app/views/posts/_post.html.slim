@@ -1,6 +1,8 @@
 //form will be embeded in views/users/show.html.slim
 
 // give id to each post in order to use with jQuery
+
+
 .panel.panel-default id="post_nr_#{post.id}"
   .panel-heading
     = link_to user_path(post.user.username) do
@@ -29,19 +31,6 @@
           small
             // count_comments is defined in the post Model
             strong#counter_number = post.count_comments
-        // user_liked_post? method defined in Post controller
-        - if post.user_liked_post?(current_user)
-          .col-xs-2.text-center
-            = link_to like_path(post.find_post_like(current_user)), method: :delete do 
-              = fa_icon "heart 3x", class: "text-center"
-            br
-            small
-              // count_likes is defined in the post Model
-              strong#counter_number = post.count_likes
-        - else
-          .col-xs-2.text-center
-            = link_to likes_path(post_id: post.id), method: :post do 
-              = fa_icon "heart-o 3x", class: "text-center"
-            br
-            small
-              strong#counter_number = post.count_likes
+        
+        // pass the 'post' variable to the 'like' partial
+        .col-xs-2.text-center.likes = render 'likes/like', post: post

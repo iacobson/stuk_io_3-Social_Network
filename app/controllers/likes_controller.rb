@@ -4,20 +4,29 @@ class LikesController < ApplicationController
 
   def create
     @like = current_user.likes.new(post_id: params[:post_id])
-    if @like.save
-      ###ADD PUBLIC ACTIVITY
-      redirect_to :back, notice: "Post Liked !"
-    else
-      render post_path(@like.post), notice: "There was an error, please try again"
+    @post = @like.post
+
+    respond_to do |format|
+      if @like.save
+        ###ADD PUBLIC ACTIVITY
+        format.html {redirect_to :back, notice: "Post Liked !"}
+        format.js
+      else
+        render post_path(@like.post), notice: "There was an error, please try again"
+      end
     end
   end
 
   def destroy
     @like = Like.find(params[:id])
-    if @like.destroy
-      redirect_to :back, notice: "Post Unliked !"
-    else
-      redirect_to :back, notice: "There was an error, please try again !"
+    @post = @like.post
+    respond_to do |format|
+      if @like.destroy
+        format.html{redirect_to :back, notice: "Post Unliked !"}
+        format.js
+      else
+        format.html{redirect_to :back, notice: "There was an error, please try again !"}
+      end
     end
   end
 
