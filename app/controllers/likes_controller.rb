@@ -8,7 +8,7 @@ class LikesController < ApplicationController
 
     respond_to do |format|
       if @like.save
-        ###ADD PUBLIC ACTIVITY
+        @like.create_activity key: "like.created", owner: @like.user, recipient: @like.post.user
         format.html {redirect_to :back, notice: "Post Liked !"}
         format.js
       else

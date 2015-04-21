@@ -34,6 +34,7 @@
               = fa_icon "pencil 2x", class: "text-muted pull-right fa-fw" if activity.trackable_type == "Post"
               = fa_icon "user-plus 2x", class: "text-muted pull-right fa-fw" if activity.trackable_type == "Friendship"
               = fa_icon "comments 2x", class: "text-muted pull-right fa-fw" if activity.trackable_type == "Comment"
+              = fa_icon "comments 2x", class: "text-muted pull-right fa-fw" if activity.trackable_type == "Comment"
               h4.timeline-title = link_to activity.owner.username, user_path(activity.owner.username)
               p
                 small = time_ago_in_words(activity.created_at)
