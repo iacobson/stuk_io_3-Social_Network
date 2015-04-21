@@ -4,6 +4,7 @@ include PublicActivity::Model
 
   belongs_to :user
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
   #user must be logged to post
   validates_presence_of :user_id
@@ -20,7 +21,32 @@ include PublicActivity::Model
   end
 
   def count_comments
-    self.comments.size
+    self.comments.count
   end
+
+  def count_likes
+    self.likes.count
+  end
+
+  #finding the corresponding like for each post.
+  def find_post_like(user)
+    current_post_id = self.id
+    current_like = Like.where{(post_id == current_post_id) & (user_id == user.id)}
+    if current_like.count > 0
+      return current_like.first.id
+    else
+      return false
+    end
+  end
+
+  def user_liked_post?(user1)
+    # if you put "self" inside the "where" expression, will get the Like, not the Post, this is why current_post_id is defined
+    if find_post_like(user1) != false
+      return true
+    else
+      return false
+    end
+  end
+
 
 end

@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   has_many :posts, dependent: :destroy
   # nested association user > post > comment
   has_many :comments
+  has_many :likes
 
 
 

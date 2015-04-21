@@ -20,7 +20,7 @@ class PostsController < ApplicationController
 
     # needed to display comments for this post
     @comments = @post.comments.order{updated_at.desc}
-    
+
   end
 
   def edit

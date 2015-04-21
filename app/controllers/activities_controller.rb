@@ -20,6 +20,7 @@ class ActivitiesController < ApplicationController
 
     # creating new posts in activities/inxed
     @post = Post.new
+    
 
   end
 
