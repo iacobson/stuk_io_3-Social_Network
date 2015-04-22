@@ -11,13 +11,21 @@ class CommentsController < ApplicationController
     # comment_params already includes post_id through the hidden field
 
     @comment = current_user.comments.build(comment_params)
+    respond_to do |format|
+      if @comment.save
+        # create public_activity when a new comment is created
+        @comment.create_activity key: "comment.posted", owner: @comment.user, recipient: @comment.post.user
+        # Comment and Like create will update the "post" "updated_at" so it will show at the top of the Timeline
+        @post = Post.find(comment_params[:post_id])
+        @post.update_attributes(updated_at: Time.now)
 
-    if @comment.save
-      # create public_activity when a new comment is created
-      @comment.create_activity key: "comment.posted", owner: @comment.user, recipient: @comment.post.user
-      redirect_to post_path(@comment.post), notice: "Comment posted"
-    else
-      redirect_to :back, notice: "Post NOT created, please retry!"
+        # HTML will work for form without 'remote: true' such as the form on the Post page
+        format.html{redirect_to post_path(@comment.post), notice: "Comment posted"}
+        # JS will work for forms with 'remote: true' such as the one on the Timeline
+        format.js
+      else
+        format.html{redirect_to :back, notice: "Post NOT created, please retry!"}
+      end
     end
 
   end

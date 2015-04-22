@@ -5,12 +5,17 @@ class PostsController < ApplicationController
   # the @post = Post.new will be created in users_controller (show method)
   def create
     @post = current_user.posts.new(post_params)
-    if @post.save
-      # create public_activity when a new post is created
-      @post.create_activity key: "post.created", owner: @post.user
-      redirect_to user_path(@post.user.username), notice: "Post created"
-    else
-      redirect_to user_path(@post.user.username), notice: "Post NOT created, please retry!"
+    respond_to do |format|
+      if @post.save
+        # create public_activity when a new post is created
+        @activity = @post.create_activity key: "post.created", owner: @post.user
+        @comment = Comment.new
+
+        format.html{redirect_to user_path(@post.user.username), notice: "Post created"}
+        format.js
+      else 
+        format.html{redirect_to user_path(@post.user.username), notice: "Post NOT created, please retry!"}
+      end
     end
   end
 

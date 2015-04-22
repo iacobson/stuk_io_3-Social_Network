@@ -15,7 +15,9 @@ class ActivitiesController < ApplicationController
       # when the link contains params "post", display only the posts, by specifying the trackable_type
       @activities = PublicActivity::Activity.where(owner_id: @users, trackable_type: "Post").order{updated_at.desc}
     else
-      @activities = PublicActivity::Activity.where(owner_id: @users, trackable_type: ["Post", "Friendship"]).order{updated_at.desc}
+      # ******
+      # sort Public Activity by the "updated_at" of the corresponding models (trackable)
+      @activities = PublicActivity::Activity.where(owner_id: @users, trackable_type: ["Post", "Friendship"]).sort_by {|e| e.trackable.updated_at}.reverse!
     end
 
     # creating new posts in activities/inxed

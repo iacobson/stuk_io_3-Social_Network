@@ -14,8 +14,8 @@ html
       .alert.alert-info.fade-in
         button.close data-dismiss="alert" x
         = message
-
-    = yield
+    div class = "#{controller_name} #{action_name}"
+      = yield
     
     // add debugging info ONLY in the development environment
     = debug(params) if Rails.env.development?

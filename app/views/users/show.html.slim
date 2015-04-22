@@ -37,7 +37,8 @@
       - if current_user == @user
         = render "posts/form"
       // _post partial is in views/posts
-      = render @posts
+      .posts_list
+        = render @posts
 
     .col-md-3
       .panel.panel-default

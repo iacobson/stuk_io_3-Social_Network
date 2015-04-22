@@ -1,7 +1,6 @@
 //form will be embeded in views/posts/show.html.slim
 // @comment is defined in the posts_controller - show Method
-- if @post.id == nil
-  - @post = post
+
 
 = simple_form_for @comment do |f|
   .panel.panel-info

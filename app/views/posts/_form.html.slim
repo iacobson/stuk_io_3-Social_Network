@@ -1,11 +1,11 @@
 //form will be embeded in views/users/show.html.slim
 // @post is defined in the users_controller - show Method
 
-= simple_form_for(@post) do |f|
+= simple_form_for(@post, remote: true) do |f|
   .panel.panel-info
     .panel-heading POST
     .panel-body
       = f.error_notification
-      = f.input :content, required: true, label: false, placeholder: "new post content here", input_html: {class: "form-control"}
+      = f.input :content, required: true, label: false, placeholder: "new post content here", input_html: {class: "form-control input_post_content"}
     .panel-footer
       = f.button :submit, class: "btn btn-primary btn-block"
